@@ -1,0 +1,37 @@
+def bfs(sr, sc):
+    queue = [(sr,sc)]
+    while queue:
+        currNode = queue.pop()
+        row, col = currNode
+        delrow = [1,0,-1,0]
+        delcol = [0,1,0,-1]
+        for i in range(0,4):
+            nrow = row + delrow[i]
+            ncol = col + delcol[i]
+            if nrow>=0 and nrow<len(matrix) and ncol>=0 and ncol<len(matrix) and visited[nrow][ncol]==0 and matrix[nrow][ncol]=="O":
+                queue.append((nrow, ncol))
+                visited[nrow][ncol]=1
+                matrix[nrow][ncol] = "$"
+                
+def matrixModifier():
+    for i in range(0,len(matrix)):
+        for j in range(0,len(matrix)):
+            if matrix[i][j]=="O":
+                matrix[i][j] = "X"
+            elif matrix[i][j] == "$":
+                matrix[i][j] = "O"
+                
+if __name__ == "__main__":
+    matrix = [["X","X","X","X","X"],
+              ["X","O","O","X","O"],
+              ["X","X","O","X","O"],
+              ["X","O","X","O","X"],
+              ["O","O","X","X","X"]]
+    visited = [[0 for col in range(0,len(matrix))] for row in range(0,len(matrix))]
+    for i in range(0,len(matrix)):
+        for j in range(0,len(matrix)):
+            if (i==0 or j==0 or i==len(matrix)-1 or j==len(matrix)-1) and matrix[i][j]=="O":
+                bfs(i,j)
+    matrixModifier()
+    for i in matrix:
+        print(*i)
