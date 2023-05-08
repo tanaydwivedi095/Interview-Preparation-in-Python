@@ -4,7 +4,7 @@ class TreeNode:
         self.val = val
         self.right = None
         
-def inorder(root):
+def preorder(root):
     stack = [root]
     res = []
     while stack:
@@ -21,4 +21,4 @@ if __name__ == "__main__":
     root.right = TreeNode(4)
     root.left.left = TreeNode(1)
     root.right.right = TreeNode(5)
-    print(inorder(root))
+    print(preorder(root))
